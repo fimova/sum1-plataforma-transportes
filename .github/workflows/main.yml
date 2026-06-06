@@ -9,7 +9,6 @@ jobs:
 
 build-and-deploy:
 
-```
 runs-on: ubuntu-latest
 
 env:
@@ -91,4 +90,3 @@ steps:
         docker logs plataforma-transportes --tail 50
 
       "
-```
