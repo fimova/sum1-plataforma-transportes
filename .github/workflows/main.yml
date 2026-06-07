@@ -1,4 +1,4 @@
-name: CI-CD Plataforma Transportes 
+name: CI-CD Plataforma Transportes
 
 on:
   push:
@@ -67,6 +67,22 @@ jobs:
             -i private_key.pem \
             ${USER_SERVER}@${EC2_HOST} << EOF
 
+          sudo mkdir -p /efs/guias
+
+          if ! mount | grep -q "/efs/guias"; then
+            echo "Montando EFS..."
+
+            sudo mount -t nfs4 \
+              -o nfsvers=4.1 \
+              fs-07372b4741449859c.efs.us-east-1.amazonaws.com:/ \
+              /efs/guias
+          else
+            echo "EFS ya estaba montado"
+          fi
+
+          echo "Contenido actual EFS:"
+          ls -la /efs/guias
+
           docker pull ${DOCKERHUB_USERNAME}/plataforma-transportes:latest
 
           docker stop plataforma-transportes || true
@@ -81,6 +97,10 @@ jobs:
             -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
             -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN} \
             ${DOCKERHUB_USERNAME}/plataforma-transportes:latest
+
+          echo "Validando volumen"
+
+          docker exec plataforma-transportes ls /efs/guias
 
           docker ps
 
