@@ -48,9 +48,6 @@ public class GuiaMapper {
                 .fecha(
                         request.getFecha()
                 )
-                .descripcion(
-                        request.getDescripcion()
-                )
                 .build();
 
     }

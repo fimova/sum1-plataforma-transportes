@@ -203,7 +203,7 @@ public class GuiaServiceImpl
                 guia.getFecha()
                         .getMonthValue(),
 
-                guia.getTransportista(),
+                transportista,
 
                 guia.getNumeroGuia()
         );

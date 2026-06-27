@@ -31,8 +31,4 @@ public class SubirGuiaRequest {
     @NotNull(message = "La fecha es obligatoria")
     LocalDate fecha;
 
-    @NotBlank(message ="La descripción es obligatoria")
-    @Size(max = 500)
-    String descripcion;
-
 }

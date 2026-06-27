@@ -96,9 +96,6 @@ public class GuiaController {
                                         fecha
                                 )
                         )
-                        .descripcion(
-                                descripcion
-                        )
                         .build();
 
         return guiaService.subirGuia(
